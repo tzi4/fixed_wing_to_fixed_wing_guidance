@@ -57,8 +57,8 @@ Repo herkese açıktır; ek bir GitHub erişim yetkisi gerekmez.
 mkdir -p "$HOME/work"
 cd "$HOME/work"
 git clone --branch erenimbus \
-  https://github.com/tzi4/fixed_wing_to_fixed_wing.git
-cd fixed_wing_to_fixed_wing
+  https://github.com/tzi4/fixed_wing_to_fixed_wing_guidance.git
+cd fixed_wing_to_fixed_wing_guidance
 ```
 
 ## 4. ArduPilot'i sabit sürümde kurma
@@ -108,7 +108,7 @@ ROS Python paketlerinin görünmesi için sanal ortamı sistem paketlerini göre
 oluşturun:
 
 ```bash
-cd "$HOME/work/fixed_wing_to_fixed_wing"
+cd "$HOME/work/fixed_wing_to_fixed_wing_guidance"
 python3 -m venv --system-site-packages .venv
 source .venv/bin/activate
 python3 -m pip install --upgrade pip
@@ -122,7 +122,7 @@ Her yeni terminalde önce sanal ortamı etkinleştirin.
 Varsayılan dizinleri kullandıysanız:
 
 ```bash
-cd "$HOME/work/fixed_wing_to_fixed_wing/bumblebee"
+cd "$HOME/work/fixed_wing_to_fixed_wing_guidance/bumblebee"
 ./scripts/doctor.sh
 ```
 
@@ -150,7 +150,7 @@ QGroundControl kurulumu için resmi yönerge:
 Önce headless modla temel ortamı doğrulayın:
 
 ```bash
-cd "$HOME/work/fixed_wing_to_fixed_wing/bumblebee"
+cd "$HOME/work/fixed_wing_to_fixed_wing_guidance/bumblebee"
 ./temp_basla.sh --headless
 ```
 
@@ -158,7 +158,7 @@ Başlatıcı; ROS master, Redis, Gazebo, iki ArduPlane örneği, MAVProxy çık�
 görev planları ve bbox köprüsünü hazırlar. Güdüm ayrı terminalde başlatılır:
 
 ```bash
-cd "$HOME/work/fixed_wing_to_fixed_wing/bumblebee"
+cd "$HOME/work/fixed_wing_to_fixed_wing_guidance/bumblebee"
 source ../.venv/bin/activate
 python3 teva.py --camera-profile sim
 ```

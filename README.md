@@ -1,4 +1,4 @@
-# fixed_wing_to_fixed_wing — Sabit Kanatlı İHA Optik Takip ve Güdüm Sistemi
+# fixed_wing_to_fixed_wing_guidance — Sabit Kanatlı İHA Optik Takip ve Güdüm Sistemi
 
 Bu repo, bir sabit kanatlı İHA'nın başka bir sabit kanatlı İHA'yı kamera
 üzerinden tespit etmesi, optik olarak kilitlemesi ve otonom biçimde takip edip
