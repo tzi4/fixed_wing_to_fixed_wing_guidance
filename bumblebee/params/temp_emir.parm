@@ -1,0 +1,64 @@
+# =====================================================================
+# temp_emir.parm - A/B KONTROL AVCISI (emir_ucak_temp modeli, SysID 1)
+# =====================================================================
+# Amac: goruntulu gudumun (old_guidance/goat_gimbal_ucak.py) sim'de yaptigi
+# osilasyonun MODEL kaynakli mi yoksa kod/ortam kaynakli mi oldugunu ayirmak.
+# Bu yuzden avci ucak "jenerik CALISAN ucak" olarak birakilir:
+#
+#   Yukleme zinciri (bumblebee_gudum.sh):
+#     --defaults gazebo-plane.parm,params/temp_emir.parm   (bu dosya SONDA)
+#
+# BURAYA SADECE ORTAM SOZLESMESI GIRER. Bumblebee'ye ozgu hicbir sey
+# (SERVO_FUNCTION V-tail eslemesi, autotune PID, TECS ince ayari, AHRS_TRIM_Y,
+# TKOFF_*, STEER2SRV_*, hiz zarfi) BU DOSYAYA GIRMEZ - girerse A/B testi
+# anlamsizlasir, cunku o zaman "bumblebee tune'u + emir modeli" test edilmis
+# olur. Kalan her sey ArduPilot'un gazebo-plane.parm varsayilanlarindan gelir;
+# yani emir_gudum.sh'in ucurdugu konfigurasyonun AYNISI.
+# ---------------------------------------------------------------------
+
+# 1) MAV_SYSID 1 - port sozlesmesi: avci SysID 1, hedef SysID 2.
+#    scripts/wait_heartbeat.py, formation.py, command_sender.py ve load_plan.py
+#    bunu bekler. NOT: yerel ArduPlane V4.7'de SYSID_THISMAV -> MAV_SYSID
+#    olarak yeniden adlandirildi (eski ad yazilirsa SESSIZCE reddedilir).
+MAV_SYSID 1
+
+# 2) TECS_SYNAIRSPEED 1 - GUIDED/AUTO hiz komutlarinin ETKI ETMESI icin sart.
+#    ARSPD_TYPE 0 (bu kurulumda gercek pitot MUMKUN degil; Gazebo backend'i
+#    Aircraft::update_dynamics()'i hic cagirmadigi icin fdm.airspeed hep 0).
+#    TECS_SYNAIRSPEED 0 iken AP_TECS _update_throttle_without_airspeed()
+#    yolunu secer, _SKE_weighting 0 olur ve MAV_CMD_DO_CHANGE_SPEED (178) /
+#    MAV_CMD_GUIDED_CHANGE_SPEED (43000) COMMAND_ACK=ACCEPTED donse bile ucak
+#    trim hizinda kalir. Ayni tespit params/target.parm ve params/bumblebee.parm
+#    icinde olcumleriyle kayitli.
+TECS_SYNAIRSPEED 1
+
+# 3) AHRS_WIND_MAX 1 - sentetik hava hizi hatasini sinirlar.
+#    Sensor olmadigi icin IAS = |V_gps(NED) - W_EKF3| / EAS2TAS olarak
+#    URETILIR; tek hata kaynagi EKF3 ruzgar tahminidir ve duz bacakta rota
+#    boyunca bileseni gozlenemez (drag fusion kapali) -> serbest gezinir.
+#    Sonuc: iki ucak da IAS 20.00 tutarken yer hizlari 19.3 / 22.05 olabiliyor.
+#    AHRS_WIND_MAX sonucu constrain(|V-W|, gnd-MAX, gnd+MAX) ile kirpar.
+#    AP_Int8 oldugu icin en kucuk etkili deger 1 (0 = kirpma yok).
+#    Hedef tarafinda (params/target.parm) da 1; iki ucak simetrik olsun diye.
+AHRS_WIND_MAX 1
+
+# 4) ARSPD_TYPE 0 - gazebo-plane.parm zaten 0 yaziyor; ACIKLIK icin tekrar
+#    edilir, cunku (2) ve (3) maddelerinin gecerliligi buna bagli.
+ARSPD_TYPE 0
+
+# =====================================================================
+# BILEREK YAZILMAYANLAR (fabrika/gazebo-plane.parm degeri gecerli kalir):
+#   AIRSPEED_CRUISE  -> V4.7'de fabrika 12 m/s. gazebo-plane.parm'daki
+#     TRIM_ARSPD_CM 2200 satiri V4.7'de KALDIRILMIS bir ad oldugu icin
+#     reddedilir. emir_gudum.sh de tam olarak bu durumdaydi, yani "calisan"
+#     referans konfigurasyon budur. Hedefte (target.parm) 20 yaziliyor ama
+#     avciya YAZILMADI: A/B'de referanstan sapmamak icin. Ucus hizi zaten
+#     formation.py --bumblebee-speed / command_sender.py ile ACIK komutlanir.
+#   AIRSPEED_MIN/MAX -> fabrika 9 / 22 m/s. formation.py'nin avci icin
+#     kullandigi statik zarf (15, 24) bundan GENIS; 22 ustu komutlar canli
+#     zarfa takilir (command_sender.py canli AIRSPEED_MIN/MAX okuyup kirpar).
+#     A/B testleri <= 22 m/s ile yapilmalidir.
+#   SERVO*_FUNCTION -> emir modelinin ArduPilotPlugin kanallari elevon/rudder/
+#     rotor duzenindedir; bumblebee'nin V-tail + cift motor eslemesi (73/74/
+#     79/80/26) BU MODELDE KONTROLLERI BOZAR.
+# =====================================================================

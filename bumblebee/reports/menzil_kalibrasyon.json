@@ -1,0 +1,353 @@
+{
+  "olusturma": "2026-07-29T19:24:04",
+  "aciklama": "Gorunur boyuttan menzil kestirimi. Gudum kodu hedefin konumunu OKUMAZ; bu katsayilar cevrimdisi kalibre edilmistir.",
+  "model": "A",
+  "formul": "R = k / sqrt_area_px",
+  "girdi_sutunu": "sqrt_area_px",
+  "parametreler": {
+    "k": 2119.6749484349093
+  },
+  "secim_olcutu": "tutulan test RMSE",
+  "genelleme_hukmu": "Model genelliyor: tutulan test RMSE 17.9 m, ic orneklem 28.9 m; tutulan testte medyan mutlak hata %24.0.",
+  "ornek_sayisi": 3511,
+  "fit_ornek": 2458,
+  "test_ornek": 1053,
+  "test_orani": 0.3,
+  "azami_zaman_farki_s": 0.15,
+  "fit_istatistikleri": {
+    "tum_veri": {
+      "n": 3511,
+      "r2": 0.8970906398218785,
+      "rmse_m": 26.073494837881604,
+      "medyan_mutlak_yuzde": 16.15981155303779,
+      "kutular": {
+        "yakin (<100 m)": {
+          "n": 1189,
+          "rmse_m": 17.504609314671384,
+          "medyan_mutlak_yuzde": 23.667240504500157
+        },
+        "orta (100-300 m)": {
+          "n": 2322,
+          "rmse_m": 29.513350986089137,
+          "medyan_mutlak_yuzde": 12.26105327358068
+        },
+        "uzak (>300 m)": {
+          "n": 0
+        }
+      }
+    },
+    "ic_orneklem": {
+      "n": 2458,
+      "r2": 0.7429373476438434,
+      "rmse_m": 28.883296390962517,
+      "medyan_mutlak_yuzde": 12.34035759138845,
+      "kutular": {
+        "yakin (<100 m)": {
+          "n": 136,
+          "rmse_m": 14.498482557447316,
+          "medyan_mutlak_yuzde": 13.365283055528986
+        },
+        "orta (100-300 m)": {
+          "n": 2322,
+          "rmse_m": 29.50923393390432,
+          "medyan_mutlak_yuzde": 12.300169394267392
+        },
+        "uzak (>300 m)": {
+          "n": 0
+        }
+      }
+    },
+    "tutulan_test": {
+      "n": 1053,
+      "r2": 0.4460767146611897,
+      "rmse_m": 17.880593911503144,
+      "medyan_mutlak_yuzde": 24.013432994009026,
+      "kutular": {
+        "yakin (<100 m)": {
+          "n": 1053,
+          "rmse_m": 17.880593911503144,
+          "medyan_mutlak_yuzde": 24.013432994009026
+        },
+        "orta (100-300 m)": {
+          "n": 0
+        },
+        "uzak (>300 m)": {
+          "n": 0
+        }
+      }
+    }
+  },
+  "gecerli_menzil_araligi": {
+    "min_m": 4.009,
+    "max_m": 275.477,
+    "medyan_m": 145.745,
+    "not": "Fit yalnizca bu aralikta gecerlidir; disina EKSTRAPOLASYON guvenilmez."
+  },
+  "gecerli_boyut_araligi": {
+    "sqrt_area_px_min": 5.92,
+    "sqrt_area_px_max": 412.89,
+    "bbox_h_min": 6.0,
+    "bbox_h_max": 241.0
+  },
+  "kaynak_csvler": [
+    {
+      "gudum_csv": "/home/tzi4/gudum/bumblebee/ucus_loglari/T5_rampa_dalis.csv",
+      "gercek_csv": "/home/tzi4/gudum/bumblebee/ucus_loglari/gt_191749.csv",
+      "gudum_satir": 4320,
+      "tracking_gecerli_satir": 3511,
+      "gercek_satir": 2868,
+      "boyut_kaynagi": "sqrt_area_px",
+      "menzil_kaynagi": "range_m",
+      "gudum_zaman": [
+        1785341971.8844,
+        1785342130.179
+      ],
+      "gercek_zaman": [
+        1785341870.1716,
+        1785342158.4863
+      ],
+      "eslesen": 3511,
+      "atilan_zaman_farki": 0,
+      "medyan_zaman_farki_s": 0.025299787521362305
+    },
+    {
+      "gudum_csv": "/home/tzi4/gudum/bumblebee/ucus_loglari/T2_ustten_toparlama.csv",
+      "gercek_csv": "/home/tzi4/gudum/bumblebee/ucus_loglari/gt_191749.csv",
+      "gudum_satir": 3620,
+      "tracking_gecerli_satir": 3619,
+      "gercek_satir": 2868,
+      "boyut_kaynagi": "sqrt_area_px",
+      "menzil_kaynagi": "range_m",
+      "gudum_zaman": [
+        1785340649.6043,
+        1785340770.961
+      ],
+      "gercek_zaman": [
+        1785341870.1716,
+        1785342158.4863
+      ],
+      "eslesen": 0,
+      "atilan_zaman_farki": 3619
+    }
+  ],
+  "tum_modeller": [
+    {
+      "ad": "A",
+      "formul": "R = k / sqrt_area_px",
+      "girdi": "sqrt_area_px",
+      "tum_veri_parametreleri": {
+        "k": 2119.6749484349093
+      },
+      "fit_kumesi_parametreleri": {
+        "k": 2115.557665246598
+      },
+      "tum_veri": {
+        "n": 3511,
+        "r2": 0.8970906398218785,
+        "rmse_m": 26.073494837881604,
+        "medyan_mutlak_yuzde": 16.15981155303779,
+        "kutular": {
+          "yakin (<100 m)": {
+            "n": 1189,
+            "rmse_m": 17.504609314671384,
+            "medyan_mutlak_yuzde": 23.667240504500157
+          },
+          "orta (100-300 m)": {
+            "n": 2322,
+            "rmse_m": 29.513350986089137,
+            "medyan_mutlak_yuzde": 12.26105327358068
+          },
+          "uzak (>300 m)": {
+            "n": 0
+          }
+        }
+      },
+      "ic_orneklem": {
+        "n": 2458,
+        "r2": 0.7429373476438434,
+        "rmse_m": 28.883296390962517,
+        "medyan_mutlak_yuzde": 12.34035759138845,
+        "kutular": {
+          "yakin (<100 m)": {
+            "n": 136,
+            "rmse_m": 14.498482557447316,
+            "medyan_mutlak_yuzde": 13.365283055528986
+          },
+          "orta (100-300 m)": {
+            "n": 2322,
+            "rmse_m": 29.50923393390432,
+            "medyan_mutlak_yuzde": 12.300169394267392
+          },
+          "uzak (>300 m)": {
+            "n": 0
+          }
+        }
+      },
+      "tutulan_test": {
+        "n": 1053,
+        "r2": 0.4460767146611897,
+        "rmse_m": 17.880593911503144,
+        "medyan_mutlak_yuzde": 24.013432994009026,
+        "kutular": {
+          "yakin (<100 m)": {
+            "n": 1053,
+            "rmse_m": 17.880593911503144,
+            "medyan_mutlak_yuzde": 24.013432994009026
+          },
+          "orta (100-300 m)": {
+            "n": 0
+          },
+          "uzak (>300 m)": {
+            "n": 0
+          }
+        }
+      }
+    },
+    {
+      "ad": "B",
+      "formul": "R = k / bbox_h",
+      "girdi": "bbox_h",
+      "tum_veri_parametreleri": {
+        "k": 1702.4462220658245
+      },
+      "fit_kumesi_parametreleri": {
+        "k": 1723.7332861008254
+      },
+      "tum_veri": {
+        "n": 3511,
+        "r2": 0.90121184404716,
+        "rmse_m": 25.546078790865323,
+        "medyan_mutlak_yuzde": 11.79820014419794,
+        "kutular": {
+          "yakin (<100 m)": {
+            "n": 1189,
+            "rmse_m": 24.900012681963517,
+            "medyan_mutlak_yuzde": 13.6127542647554
+          },
+          "orta (100-300 m)": {
+            "n": 2322,
+            "rmse_m": 25.870657193318483,
+            "medyan_mutlak_yuzde": 10.688325771775531
+          },
+          "uzak (>300 m)": {
+            "n": 0
+          }
+        }
+      },
+      "ic_orneklem": {
+        "n": 2458,
+        "r2": 0.798457869304114,
+        "rmse_m": 25.574678773218235,
+        "medyan_mutlak_yuzde": 11.076171324498105,
+        "kutular": {
+          "yakin (<100 m)": {
+            "n": 136,
+            "rmse_m": 23.661008503908207,
+            "medyan_mutlak_yuzde": 23.844581615058587
+          },
+          "orta (100-300 m)": {
+            "n": 2322,
+            "rmse_m": 25.68234275585812,
+            "medyan_mutlak_yuzde": 10.557805928253657
+          },
+          "uzak (>300 m)": {
+            "n": 0
+          }
+        }
+      },
+      "tutulan_test": {
+        "n": 1053,
+        "r2": -0.1494073769653801,
+        "rmse_m": 25.75693126625778,
+        "medyan_mutlak_yuzde": 14.693658408919887,
+        "kutular": {
+          "yakin (<100 m)": {
+            "n": 1053,
+            "rmse_m": 25.75693126625778,
+            "medyan_mutlak_yuzde": 14.693658408919887
+          },
+          "orta (100-300 m)": {
+            "n": 0
+          },
+          "uzak (>300 m)": {
+            "n": 0
+          }
+        }
+      }
+    },
+    {
+      "ad": "C",
+      "formul": "R = a / sqrt_area_px + b",
+      "girdi": "sqrt_area_px",
+      "tum_veri_parametreleri": {
+        "a": 1898.3043965561383,
+        "b": 20.270727036318085
+      },
+      "fit_kumesi_parametreleri": {
+        "a": 1641.8472800238226,
+        "b": 46.366377181852876
+      },
+      "tum_veri": {
+        "n": 3511,
+        "r2": 0.9142668617387473,
+        "rmse_m": 23.7983128091958,
+        "medyan_mutlak_yuzde": 11.12730218292476,
+        "kutular": {
+          "yakin (<100 m)": {
+            "n": 1189,
+            "rmse_m": 17.836486277343027,
+            "medyan_mutlak_yuzde": 13.435485074558562
+          },
+          "orta (100-300 m)": {
+            "n": 2322,
+            "rmse_m": 26.333677850730176,
+            "medyan_mutlak_yuzde": 10.499515254206326
+          },
+          "uzak (>300 m)": {
+            "n": 0
+          }
+        }
+      },
+      "ic_orneklem": {
+        "n": 2458,
+        "r2": 0.8202388223569795,
+        "rmse_m": 24.15323000229714,
+        "medyan_mutlak_yuzde": 9.323969622246375,
+        "kutular": {
+          "yakin (<100 m)": {
+            "n": 136,
+            "rmse_m": 22.44633813517034,
+            "medyan_mutlak_yuzde": 21.315923925877673
+          },
+          "orta (100-300 m)": {
+            "n": 2322,
+            "rmse_m": 24.249478714542075,
+            "medyan_mutlak_yuzde": 8.823742515927766
+          },
+          "uzak (>300 m)": {
+            "n": 0
+          }
+        }
+      },
+      "tutulan_test": {
+        "n": 1053,
+        "r2": -1.0272667075993667,
+        "rmse_m": 34.20680982201481,
+        "medyan_mutlak_yuzde": 55.51615668325434,
+        "kutular": {
+          "yakin (<100 m)": {
+            "n": 1053,
+            "rmse_m": 34.20680982201481,
+            "medyan_mutlak_yuzde": 55.51615668325434
+          },
+          "orta (100-300 m)": {
+            "n": 0
+          },
+          "uzak (>300 m)": {
+            "n": 0
+          }
+        }
+      }
+    }
+  ]
+}

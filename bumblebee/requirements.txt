@@ -1,0 +1,8 @@
+# ROS paketleri (rospy, cv_bridge, sensor_msgs, gazebo_msgs) apt ile kurulur.
+# Bunlar Ubuntu 20.04 / Python 3.8 üzerinde doğrulanan kullanıcı-uzayı sürümleridir.
+MAVProxy==1.8.71
+matplotlib==3.7.5
+numpy==1.24.4
+opencv-python==4.12.0.88
+pymavlink==2.4.41
+redis==6.1.1

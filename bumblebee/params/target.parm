@@ -1,0 +1,42 @@
+# Hedef (target, SysID 2 - emir-gazebo-plane2) SITL ek parametreleri.
+# gazebo-plane.parm'in USTUNE yuklenir; yalniz HIZ UYUMU icin gereken iki
+# satiri duzeltir, ucus/servo/kalibrasyon ayarlarina dokunmaz.
+#
+# 1) TECS_SYNAIRSPEED 1
+#    ARSPD_TYPE 0 (gercek pitot yok). TECS_SYNAIRSPEED 0 iken AP_TECS
+#    _update_throttle_without_airspeed() yolunu secer ve _SKE_weighting 0 olur;
+#    bu durumda GUIDED hiz komutu (MAV_CMD_GUIDED_CHANGE_SPEED 43000 ve
+#    MAV_CMD_DO_CHANGE_SPEED 178) COMMAND_ACK=ACCEPTED donse bile ucaga HIC
+#    etki etmez - ucak TRIM_THROTTLE trim hizinda sabit kalir.
+#    Olcum (2026-07-25, reports/speed_tests/results.json + results2.json):
+#      syn=0 -> komut 10/12/15/18/22 m/s, gerceklesen HEP 20.2 m/s (GPS),
+#               gaz %88 sabit, ACK hepsi ACCEPTED.
+#      syn=1 -> komut 10 -> 9.93, 15 -> 15.01, 18 -> 17.93, 22 -> 21.98 (GPS).
+#
+# 2) AIRSPEED_CRUISE 20
+#    ArduPlane 4.7 gazebo-plane.parm'daki TRIM_ARSPD_CM artik gecersiz bir ad
+#    oldugundan hedef, fabrika varsayilani 12 m/s ile kaliyordu. Hiz dongusu
+#    (1) ile kapandigi anda komut verilmeyen durumda hedef 20 m/s yerine
+#    12 m/s'e dusecekti; bu satir hedefin bugunku ~20 m/s seyir hizini korur.
+#
+# Zarf (AIRSPEED_MIN 9 / AIRSPEED_MAX 22) BILEREK fabrika degerinde birakildi:
+# 22 m/s'de gaz zaten %96.8 oldugu icin ust sinir gercekci.
+#
+# 3) AHRS_WIND_MAX 1
+#    Sensor yok (ARSPD_TYPE 0), bu yuzden TECS'in gordugu hava hizi
+#    AP_AHRS::_airspeed_EAS() icinde SENTETIK uretilir:
+#      IAS = |V_gps(NED) - W_EKF3| / EAS2TAS
+#    Tek hata kaynagi EKF3 ruzgar tahminidir ve duz bacakta rota boyunca
+#    bileseni GOZLENEMEZ (drag fusion kapali: EK3_DRAG_BCOEF_X 0), yani serbest
+#    gezinir. Olcum (2026-07-25, SIM_WIND_SPD=0 -> GERCEK ruzgar SIFIR;
+#    reports/speed_tests/gizem_2026-07-25/wind_probe_PRE.txt):
+#      hedef: EKF3 ruzgar 2.15 m/s @180 deg (kuyruk) -> IAS-GPS = -2.19
+#      avci : EKF3 ruzgar 0.41 m/s @34 deg          -> IAS-GPS = +0.29
+#    Yani IKI ucak da IAS 20.00 tutarken yer hizlari 22.05 ve 19.3 idi.
+#    AHRS_WIND_MAX bu farki kirpar: constrain(|V-W|, gnd-MAX, gnd+MAX).
+#    0 = kirpma yok (fabrika). AP_Int8 oldugu icin en kucuk etkili deger 1.
+#    Olculen etki (komut 20 m/s): hedef GPS 22.05 -> 21.04, avci -> 19.99.
+#    Kalan ~1 m/s fark formation.py --speed olcum tabanli trim ile kapanir.
+TECS_SYNAIRSPEED 1
+AIRSPEED_CRUISE 20
+AHRS_WIND_MAX 1

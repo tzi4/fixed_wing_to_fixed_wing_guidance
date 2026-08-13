@@ -1,0 +1,5 @@
+# Avcı (hunter) SITL başlangıç parametreleri — emir-gazebo-plane modeli.
+# emir ortamı gazebo-plane.parm varsayılanlarıyla uçuyordu; V-tail servo
+# eşlemeli bumblebee.parm emir modeline UYGULANMAZ (kontrolleri bozar).
+# Bu dosya yalnız SysID'i sabitler; kalan her şey gazebo-plane.parm'dan gelir.
+SYSID_THISMAV 1

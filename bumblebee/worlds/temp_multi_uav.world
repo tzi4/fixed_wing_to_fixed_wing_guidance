@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <world name="default">
+    <physics type="ode">
+      <ode>
+        <solver><type>quick</type><iters>100</iters><sor>1.0</sor></solver>
+        <!-- YER TEMASI: iq_sim/emir_multi_uav.world (emir_gudum.sh referansi) ile BIREBIR.
+           Onceki 100.0 / 0.001 degerleri BUMBLEBEE icindi (12 kg taildragger 0.1 ile
+           zemine gomuluyordu). Bumblebee terk edildi -> kanitli referansa donuldu. -->
+        <constraints><cfm>0.0</cfm><erp>0.9</erp><contact_max_correcting_vel>0.1</contact_max_correcting_vel><contact_surface_layer>0.0</contact_surface_layer></constraints>
+      </ode>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <max_step_size>0.001</max_step_size>
+    </physics>
+    <scene>
+      <sky><clouds><speed>12</speed></clouds></sky>
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.25 0.25 0.25 1</background>
+    </scene>
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>5000 5000</size></plane></geometry>
+          <surface>
+            <friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction>
+          </surface>
+        </collision>
+        <visual name="runway">
+          <pose>0 0 0.005 0 0 0</pose><cast_shadows>false</cast_shadows>
+          <geometry><plane><normal>0 0 1</normal><size>1829 45</size></plane></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Runway</name></script></material>
+        </visual>
+        <visual name="grass">
+          <pose>0 0 -0.1 0 0 0</pose><cast_shadows>false</cast_shadows>
+          <geometry><plane><normal>0 0 1</normal><size>5000 5000</size></plane></geometry>
+          <material><script><uri>file://media/materials/scripts/gazebo.material</uri><name>Gazebo/Grass</name></script></material>
+        </visual>
+      </link>
+    </model>
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse><specular>0.2 0.2 0.2 1</specular>
+      <attenuation><range>1000</range><constant>0.9</constant><linear>0.01</linear><quadratic>0.001</quadratic></attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+    <!-- A/B KONTROL DUNYASI: bumblebee_multi_uav.world ile BIREBIR ayni
+         (fizik, pist, isik, hedef, pozlar); TEK fark avci modelidir.
+         hunter = model://emir_ucak_temp (calistigi bilinen emir ucagi,
+         yalniz kamerasi gercek spec'e cevrilmis kopya). -->
+    <model name="hunter">
+      <include><uri>model://emir_ucak_temp</uri></include>
+      <pose>0 0 0 0 0 0</pose>
+    </model>
+    <!-- HEDEF = MOR (2026-07-28). models/hedef_mor, iq_sim'deki
+         emir-gazebo-plane2'nin yerel kopyasidir; TEK fark gorsel malzemenin
+         Gazebo/Red yerine mor (RGB 1 0 1 -> OpenCV HSV H=150) olmasidir.
+         Fizik/kutle/LiftDrag/ArduPilotPlugin ve SDF model adi
+         ('emir-gazebo-plane2') orijinalle BIREBIR aynidir, portlar 9012/9013.
+         Bu sayede yukaridaki <sky> ve zemin dokusu (pist + cim) AYNEN
+         durabiliyor: bbox_to_redis.py artik mor ariyor, gokyuzu kubbesinin
+         ufuk bandi (H~112) ve zemin artefaktlari (H~0-49) mor pencerenin
+         (H 140-160) DISINDA kaldigi icin yanlis pozitif uretmiyor.
+         iq_sim altindaki orijinal modele DOKUNULMADI. -->
+    <model name="target">
+      <include><uri>model://hedef_mor</uri></include>
+      <pose>20 0 0 0 0 0</pose>
+    </model>
+  </world>
+</sdf>

@@ -1,0 +1,4 @@
+# Uçak 2 (Instance 1, SYSID 2) - Özel Parametreler
+# İstediğiniz parametreyi ekleyin, set_params.py otomatik okuyacak
+TRIM_THROTTLE   71
+AIRSPEED_CRUISE 18.0

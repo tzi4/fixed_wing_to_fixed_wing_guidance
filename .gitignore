@@ -1,0 +1,95 @@
+# Large model files
+*.pth
+*.pt
+*.onnx
+
+# Logs and telemetry
+*.log
+*.tlog
+*.tlog.raw
+Logs/
+logs/
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+env/
+.env
+
+# OS
+.DS_Store
+
+# ====================================
+# Root seviyesindeki dosyalar (klasörlerde kopyaları var)
+# Diskte kalır ama git track etmez
+# ====================================
+detect.sh
+detect2.sh
+gudum4.sh
+gudum9.sh
+tzi.py
+tzi2.py
+detection_son.py
+detection_son2.py
+frame_publisher.py
+frame_publisher2.py
+tracker_allstar.py
+siamrpn.py
+redis_helper.py
+
+# Eski / gereksiz bash scriptler
+gudum.sh
+gudum2.sh
+gudum3.sh
+gudum4fixed.sh
+gudum5.sh
+gudum8.sh
+cam.sh
+sanal_gimbal_test1.sh
+
+# Eski klasör kopyaları
+gudum/
+trin_throttle/
+
+# Canonical historical archive: the root working copies above remain ignored,
+# while their reviewed snapshots are intentionally versioned here.
+!goat_gimbal_raw/
+!goat_gimbal_raw/tzi.py
+!goat_gimbal_raw/tzi2.py
+
+# Diğer untrack edilenler
+commander.py
+corrected.waypoints
+graphs_ktr.py
+yawrate.py
+
+# Geçici ve büyük dosyalar
+seq_system.log
+paylasinlar/
+plots/
+trash codes/
+trashcodes/
+son_sunum/
+suas/
+
+# Bumblebee: buyuk ArduPilot dataflash log dokumu (48 MB, GitHub'a girmez)
+bumblebee/00000013.BIN
+
+# Bumblebee: dogrulama BIN loglari (188 MB) ve gudum test kalintisi CSV'ler
+bumblebee/new_verification_logs/
+bumblebee/old_guidance/*.csv
+bumblebee/teva_log_*.csv
+bumblebee/teva_log_*.csv.config.json
+
+# Calisma zamani kalintilari
+*.pid
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Bumblebee: bbox cizili kamera video kayitlari (BUMBLEBEE_VIDEO=1). Diskte kalir,
+# git track etmez — 720p kayit hizli sisiyor.
+bumblebee/videos/

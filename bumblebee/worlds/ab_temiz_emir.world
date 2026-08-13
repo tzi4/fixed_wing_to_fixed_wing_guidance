@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <world name="default">
+    <physics type="ode">
+      <ode>
+        <solver><type>quick</type><iters>100</iters><sor>1.0</sor></solver>
+        <constraints><cfm>0.0</cfm><erp>0.9</erp><contact_max_correcting_vel>100.0</contact_max_correcting_vel><contact_surface_layer>0.001</contact_surface_layer></constraints>
+      </ode>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <max_step_size>0.001</max_step_size>
+    </physics>
+    <scene>
+      <!-- ARTIK GEREKLI DEGIL (2026-07-28): hedef MOR'a alindi
+           (models/hedef_mor, model://hedef_mor). Mor pencere (H 140-160)
+           gokyuzu ve zemin dokusuyla cakismadigi icin A/B testleri artik
+           GERCEKCI dunyada kosuluyor: bumblebee_multi_uav.world ve
+           temp_multi_uav.world (<sky> + pist + cim YERINDE). Bu iki
+           "temiz" dunya YALNIZ KIYAS icin, kirmizi hedefle yapilmis eski
+           kosulari tekrar uretebilmek amaciyla duruyor; yeni olcumlerde
+           KULLANILMAZ. Asagidaki aciklama o donemin gerekcesidir. -->
+      <!-- A/B GUDUM TESTI: <sky> KALDIRILDI. Gazebo gokyuzu kubbesi ufuk
+           bandinda pembemsi-kirmizi (BGR ~127,127,255) render ediyor; ucak
+           yatinca bu bant kadrajin altini dolduruyor ve bbox_to_redis.py'nin
+           kirmizi HSV penceresine tam kadraj genisliginde (w=1920, h~150)
+           sahte hedef olarak giriyor. Gudum bunu ufkun 13 derece altinda
+           gorup irtifa komutunu -25 m'ye doyuruyor -> kontrolsuz dalis.
+           Sky kaldirilinca arka plan duz gri (0.25) kaliyor; sahnede kirmizi
+           uretebilecek TEK nesne gercek hedef ucaktir.
+           Fizik / model / kamera / parametre / gudum kodu DEGISMEDI.
+           Iki kolda (bumblebee ve emir) BIREBIR ayni degisiklik. -->
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.25 0.25 0.25 1</background>
+    </scene>
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>5000 5000</size></plane></geometry>
+          <surface>
+            <contact><ode><max_vel>10.0</max_vel><min_depth>0.01</min_depth></ode></contact>
+            <friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction>
+          </surface>
+        </collision>
+        <!-- A/B GUDUM TESTI: ZEMIN GORSELI KALDIRILDI (collision AYNEN DURUYOR;
+             kalkis/fizik degismedi). Zemin dokusu sıyırma acisinda ufkun
+             ~13 derece altinda kirmizi-uclu cizgi artefaktlari uretiyordu. -->
+      </link>
+    </model>
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse><specular>0.2 0.2 0.2 1</specular>
+      <attenuation><range>1000</range><constant>0.9</constant><linear>0.01</linear><quadratic>0.001</quadratic></attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+    <!-- A/B KONTROL DUNYASI: bumblebee_multi_uav.world ile BIREBIR ayni
+         (fizik, pist, isik, hedef, pozlar); TEK fark avci modelidir.
+         hunter = model://emir_ucak_temp (calistigi bilinen emir ucagi,
+         yalniz kamerasi gercek spec'e cevrilmis kopya). -->
+    <model name="hunter">
+      <include><uri>model://emir_ucak_temp</uri></include>
+      <pose>0 0 0 0 0 0</pose>
+    </model>
+    <model name="target">
+      <include><uri>model://emir-gazebo-plane2</uri></include>
+      <pose>20 0 0 0 0 0</pose>
+    </model>
+  </world>
+</sdf>

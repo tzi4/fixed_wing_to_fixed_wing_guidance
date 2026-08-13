@@ -1,0 +1,18 @@
+__pycache__/
+*.pyc
+tzi_emir_log_*.csv
+logs/
+reports/
+run/
+build/
+arsiv/
+
+# Uçuş/koşu verileri: diskte kalır, git'e girmez.
+ucus_loglari/
+flight_log_guided_*.csv
+irtifa_farkı_*.log
+27_july_logs/
+july_1_logs/
+new_verification_logs/
+videos/
+*.BIN
