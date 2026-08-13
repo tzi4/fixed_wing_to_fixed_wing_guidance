@@ -51,14 +51,14 @@ ArduPilot'in güncel genel yönergesi:
 
 ## 3. Repoyu klonlama
 
-Repo özeldir; GitHub hesabınızın erişimi olmalıdır.
+Repo herkese açıktır; ek bir GitHub erişim yetkisi gerekmez.
 
 ```bash
 mkdir -p "$HOME/work"
 cd "$HOME/work"
 git clone --branch erenimbus \
-  https://github.com/tzi4/savasan_iha_goruntulu_gudum.git
-cd savasan_iha_goruntulu_gudum
+  https://github.com/tzi4/fixed_wing_to_fixed_wing.git
+cd fixed_wing_to_fixed_wing
 ```
 
 ## 4. ArduPilot'i sabit sürümde kurma
@@ -108,7 +108,7 @@ ROS Python paketlerinin görünmesi için sanal ortamı sistem paketlerini göre
 oluşturun:
 
 ```bash
-cd "$HOME/work/savasan_iha_goruntulu_gudum"
+cd "$HOME/work/fixed_wing_to_fixed_wing"
 python3 -m venv --system-site-packages .venv
 source .venv/bin/activate
 python3 -m pip install --upgrade pip
@@ -122,7 +122,7 @@ Her yeni terminalde önce sanal ortamı etkinleştirin.
 Varsayılan dizinleri kullandıysanız:
 
 ```bash
-cd "$HOME/work/savasan_iha_goruntulu_gudum/bumblebee"
+cd "$HOME/work/fixed_wing_to_fixed_wing/bumblebee"
 ./scripts/doctor.sh
 ```
 
@@ -150,7 +150,7 @@ QGroundControl kurulumu için resmi yönerge:
 Önce headless modla temel ortamı doğrulayın:
 
 ```bash
-cd "$HOME/work/savasan_iha_goruntulu_gudum/bumblebee"
+cd "$HOME/work/fixed_wing_to_fixed_wing/bumblebee"
 ./temp_basla.sh --headless
 ```
 
@@ -158,7 +158,7 @@ Başlatıcı; ROS master, Redis, Gazebo, iki ArduPlane örneği, MAVProxy çık�
 görev planları ve bbox köprüsünü hazırlar. Güdüm ayrı terminalde başlatılır:
 
 ```bash
-cd "$HOME/work/savasan_iha_goruntulu_gudum/bumblebee"
+cd "$HOME/work/fixed_wing_to_fixed_wing/bumblebee"
 source ../.venv/bin/activate
 python3 teva.py --camera-profile sim
 ```
