@@ -1,0 +1,4 @@
+# Airplane 1 (Instance 0, SYSID 1) - Special Parameters
+# Add the parameter you want, set_params.py will read it automatically
+TRIM_THROTTLE   70
+AIRSPEED_CRUISE 18.0
