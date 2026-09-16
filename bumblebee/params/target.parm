@@ -1,0 +1,31 @@
+# Target SysID 2, emir-gazebo-plane2, additional SITL parameters.
+# Load after gazebo-plane.parm. These settings support speed matching
+# while preserving flight, servo and calibration parameters.
+#
+# With no pitot sensor (ARSPD_TYPE 0), TECS_SYNAIRSPEED = 0 selects
+# _update_throttle_without_airspeed() and sets _SKE_weighting = 0.
+# Commands 178 and 43000 can return ACCEPTED without affecting speed.
+# Measurements on 2026-07-25 in reports/speed_tests/results.json/results2.json:
+#   syn=0: requests 10/12/15/18/22 m/s all gave 20.2 m/s ground speed,
+#          fixed 88% throttle and ACCEPTED acknowledgments.
+#   syn=1: requests 10/15/18/22 gave 9.93/15.01/17.93/21.98 m/s.
+TECS_SYNAIRSPEED 1
+
+# ArduPlane 4.7 rejects the former TRIM_ARSPD_CM parameter. Without an
+# explicit AIRSPEED_CRUISE, enabling speed control would restore the
+# default 12 m/s rather than the target's intended 20 m/s cruise.
+# Keep the default AIRSPEED_MIN/MAX envelope of 9-22 m/s. At 22 m/s,
+# measured throttle was already 96.8%.
+AIRSPEED_CRUISE 20
+
+# Synthetic airspeed is IAS = |V_gps(NED) - W_EKF3| / EAS2TAS.
+# With EK3_DRAG_BCOEF_X = 0, wind along a straight flight path is
+# unobservable. Measurements with SIM_WIND_SPD = 0 on 2026-07-25:
+#   target: EKF3 wind 2.15 m/s at 180 degrees, IAS-GPS = -2.19 m/s.
+#   hunter: EKF3 wind 0.41 m/s at 34 degrees, IAS-GPS = +0.29 m/s.
+# Both held IAS 20.00 while ground speeds were 22.05 and 19.3 m/s.
+# AHRS_WIND_MAX bounds the result by constrain(|V-W|, gnd-MAX, gnd+MAX).
+# Zero disables the bound. As an AP_Int8, the smallest effective value is 1.
+# With a 20 m/s request, this changed target GPS speed to 21.04 and hunter
+# speed to 19.99 m/s. formation.py measures and compensates the residual.
+AHRS_WIND_MAX 1

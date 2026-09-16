@@ -1,0 +1,5 @@
+# Hunter (hunter) SITL initial parameters — emir-gazebo-plane model.
+# the order environment was flying with gazebo-plane.parm defaults; V-tail servo
+# DOES NOT apply to matched bumblebee.parm order pattern (breaks checks).
+# This file only fixes the SysID; everything else comes from gazebo-plane.parm.
+SYSID_THISMAV 1

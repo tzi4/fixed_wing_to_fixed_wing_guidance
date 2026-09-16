@@ -1,0 +1,42 @@
+# Erenimbus hunter, SysID 1: simulation interface parameters.
+# Load after gazebo-plane.parm. This configuration isolates aircraft-model
+# effects when comparing visual guidance. Airframe-specific servo mapping,
+# autotune gains, TECS tuning, AHRS_TRIM_Y, takeoff and steering parameters
+# remain those of the reference gazebo-plane configuration.
+#
+# Hunter SysID is 1 and target SysID is 2. ArduPlane 4.7 names this parameter
+# MAV_SYSID. The former SYSID_THISMAV name is rejected by this build.
+MAV_SYSID 1
+
+# Enable synthetic airspeed for speed-command response. This setup has no
+# pitot sensor. Its Gazebo backend reports zero fdm.airspeed because it does
+# not call Aircraft::update_dynamics(). With TECS_SYNAIRSPEED = 0, AP_TECS
+# selects _update_throttle_without_airspeed() and _SKE_weighting = 0.
+# Commands 178 and 43000 may then return ACCEPTED without changing speed.
+# The same effect is documented in params/target.parm.
+TECS_SYNAIRSPEED 1
+
+# Bound synthetic airspeed error. Without a sensor:
+# IAS = |V_gps(NED) - W_EKF3| / EAS2TAS.
+# With drag fusion disabled, the wind component along a straight flight
+# path is unobservable. Each aircraft's wind estimate can drift differently.
+# Both aircraft held IAS 20.00 while ground speeds were 19.3 and 22.05 m/s.
+# AHRS_WIND_MAX applies constrain(|V-W|, gnd-MAX, gnd+MAX).
+# As an AP_Int8, its smallest effective value is 1. Zero disables clamping.
+# The target also uses 1 to keep this setting symmetric.
+AHRS_WIND_MAX 1
+
+# Explicitly retain the no-sensor configuration used above.
+ARSPD_TYPE 0
+
+# Parameters deliberately inherited from gazebo-plane.parm or defaults:
+# AIRSPEED_CRUISE: ArduPlane 4.7 defaults to 12 m/s. The old TRIM_ARSPD_CM
+# value 2200 is rejected by this build. The target explicitly uses 20 m/s,
+# while the hunter retains the reference default for the A/B comparison.
+# formation.py --bumblebee-speed and command_sender.py command flight speed.
+# AIRSPEED_MIN/MAX: default envelope 9-22 m/s. The static formation.py
+# hunter envelope 15-24 m/s is wider. command_sender.py reads and enforces
+# live limits. Keep these A/B tests at or below 22 m/s.
+# SERVO*_FUNCTION: the Erenimbus plugin uses elevon, rudder and rotor
+# channels. Bumblebee's V-tail and twin-motor mapping, 73/74/79/80/26,
+# would route these controls incorrectly on this model.

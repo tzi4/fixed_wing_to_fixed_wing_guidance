@@ -1,0 +1,99 @@
+{
+    "camera_streamer": {
+        "musabaka_no": 1,
+        "resolution": "1936x1216",
+        "fps": 25,
+        "arayuz_bilgisayar_ip": "udp://@127.0.0.1:3838",
+        "local_ip": "udp://@127.0.0.1:3838"
+    },
+    "resolution": {
+        "w": 640,
+        "h": 480,
+        "vfov": 54.3,
+        "hfov": 68.75
+    },
+    "camera": {
+        "focal_length": 467.7
+    },
+    "guidance": {
+        "MIN_THROTTLE": 0.4,
+        "MAX_THROTTLE": 0.9,
+        "MIN_SPEED": 12,
+        "MAX_SPEED": 27,
+        "MAX_ROLL": 36,
+        "MAX_PITCH": 20,
+        "MAX_YAW": 20,
+        "MAX_TIME_WO_YOLO": 2,
+        "APP_SIM": true,
+        "MIN_ALTITUDE": 15,
+        "MAX_ALTITUDE": 200,
+        "max_delta_heading": 15.0,
+        "max_delta_altitude": 5.0
+    },
+    "yolo": {
+        "model_path": "/home/aziz/combat_guidance/competition/final/Models/v10_final.pt",
+        "threshold": 0.4,
+        "device": "0",
+        "yolo_timeout_system_switch": 4
+    },
+    "located": {
+        "forbidden_area_polygon": [
+            [
+                41.1098804,
+                28.5555559
+            ],
+            [
+                41.0993020,
+                28.5647907
+            ],
+            [
+                41.0906460,
+                28.5506297
+            ],
+            [
+                41.1017525,
+                28.5362497
+            ]
+        ],
+        "expected_loiter_radius": 90,
+        "yolo_distance_threshold": 60,
+        "adjust_speed_threshold": 100,
+        "cruise_speed": 17,
+        "ahead_point_threshold": 70,
+        "alt_with_step": false,
+        "target_minus_alt": -20
+    },
+    "uav_handler": {
+        "uav_ip": "10.42.0.3",
+        "yerel_ip": "127.0.0.1",
+        "uav_port": "14553",
+        "uav_port_0": "14555",
+        "is_local": true,
+        "ground_ip": "127.0.0.1",
+        "telemetry_port": 4001,
+        "control_port": 5001,
+        "target_port": 6001,
+        "frame_port": 7101
+    },
+    "competition_coordinates": {
+        "upper_left": {
+            "lat": "41.1091321",
+            "lon": "28.5404885"
+        },
+        "down_left": {
+            "lat": "41.095231",
+            "lon": "28.5426145"
+        },
+        "down_right": {
+            "lat": "41.0961037",
+            "lon": "28.5562421"
+        },
+        "upper_right": {
+            "lat": "41.1102308",
+            "lon": "28.5556265"
+        }
+    },
+    "estimated_density_center": {
+        "x": 1
+    }
+}

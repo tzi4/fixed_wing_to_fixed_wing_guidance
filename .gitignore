@@ -1,0 +1,123 @@
+# Large model files
+*.pth
+*.pt
+*.onnx
+
+# Logs and telemetry
+*.log
+*.tlog
+*.tlog.raw
+Logs/
+logs/
+
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+venv/
+env/
+.env
+
+# OS
+.DS_Store
+
+# ====================================
+# Files at root level (there are copies in folders)
+# It fails on disk but git doesn't track it
+# ====================================
+detect.sh
+detect2.sh
+guidance4.sh
+guidance9.sh
+tzi.py
+tzi2.py
+detection_final.py
+detection_final2.py
+frame_publisher.py
+frame_publisher2.py
+tracker_allstar.py
+siamrpn.py
+redis_helper.py
+
+# Old/unnecessary bash scripts
+guidance.sh
+guidance2.sh
+guidance3.sh
+guidance4_fixed.sh
+guidance5.sh
+guidance8.sh
+cam.sh
+virtual_gimbal_test1.sh
+
+# Old folder copies
+guidance/
+trin_throttle/
+
+# Canonical historical archive: the root working copies above remain ignored,
+# while their reviewed snapshots are intentionally versioned here.
+!goat_gimbal_raw/
+!goat_gimbal_raw/tzi.py
+!goat_gimbal_raw/tzi2.py
+
+# Others who were excluded
+commander.py
+corrected.waypoints
+graphs_ktr.py
+yawrate.py
+
+# Temporary and large files
+seq_system.log
+shared_files/
+plots/
+trash codes/
+trashcodes/
+final_presentation/
+suas/
+
+# Bumblebee: large ArduPilot dataflash log export (48 MB, excluded from Git)
+bumblebee/00000013.BIN
+
+# Bumblebee: verification BIN logs (188 MB) and guidance test artifact CSVs
+bumblebee/new_verification_logs/
+bumblebee/old_guidance/*.csv
+bumblebee/teva_log_*.csv
+bumblebee/teva_log_*.csv.config.json
+
+# Runtime artifacts
+*.pid
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Bumblebee: bbox scratched camera video records (BUMBLEBEE_VIDEO=1). fails on disk,
+# git doesn't track — 720p recording is fast.
+bumblebee/videos/
+
+# Retain the versioned research sources and calibration report.
+!/future_research/guidance/
+!/bumblebee/reports/range_calibration.json
+!/detect2_env/detect2.sh
+!/detect2_env/detection_final2.py
+!/detect2_env/frame_publisher.py
+!/detect2_env/siamrpn.py
+!/detect2_env/tracker_allstar.py
+!/detectCV_env/siamrpn.py
+!/detect_env/detect.sh
+!/detect_env/detection_final.py
+!/detect_env/frame_publisher.py
+!/detect_env/siamrpn.py
+!/detect_env/tracker_allstar.py
+!/future_research/guidance/initial_camp_emir.py
+!/future_research/guidance/teva.py
+!/future_research/guidance/tzi_3.5_fused.py
+!/future_research/guidance/tzi_3_1_fused.py
+!/future_research/guidance/tzi_4.6_fused.py
+!/future_research/guidance/tzi_emir.py
+!/future_research/guidance/tzi_final.py
+!/goat_gimbal_raw/tzi.py
+!/goat_gimbal_raw/tzi2.py
+!/guidance4_env/guidance4.sh
+!/guidance4_env/tzi.py
+!/guidance9_env/guidance9.sh
+!/guidance9_env/tzi2.py

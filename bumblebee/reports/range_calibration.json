@@ -1,0 +1,353 @@
+{
+  "creation": "2026-07-29T19:24:04",
+  "explanation": "Range estimation from apparent size. The guidance code does NOT read the target's location; these coefficients were calibrated offline.",
+  "model": "A",
+  "formula": "R = k / sqrt_area_px",
+  "input_column": "sqrt_area_px",
+  "parameters": {
+    "k": 2119.6749484349093
+  },
+  "selection_criterion": "held-out test RMSE",
+  "generalization_verdict": "The model generalizes: retained test RMSE 17.9 m, internal sample 28.9 m; median absolute error in the retained test was 24.0%.",
+  "sample_count": 3511,
+  "fit_samples": 2458,
+  "test_samples": 1053,
+  "test_ratio": 0.3,
+  "max_time_difference_s": 0.15,
+  "fit_statistics": {
+    "all_data": {
+      "n": 3511,
+      "r2": 0.8970906398218785,
+      "rmse_m": 26.073494837881604,
+      "median_absolute_percent": 16.15981155303779,
+      "range_bins": {
+        "near (<100 m)": {
+          "n": 1189,
+          "rmse_m": 17.504609314671384,
+          "median_absolute_percent": 23.667240504500157
+        },
+        "medium (100-300 m)": {
+          "n": 2322,
+          "rmse_m": 29.513350986089137,
+          "median_absolute_percent": 12.26105327358068
+        },
+        "far (>300 m)": {
+          "n": 0
+        }
+      }
+    },
+    "training_set": {
+      "n": 2458,
+      "r2": 0.7429373476438434,
+      "rmse_m": 28.883296390962517,
+      "median_absolute_percent": 12.34035759138845,
+      "range_bins": {
+        "near (<100 m)": {
+          "n": 136,
+          "rmse_m": 14.498482557447316,
+          "median_absolute_percent": 13.365283055528986
+        },
+        "medium (100-300 m)": {
+          "n": 2322,
+          "rmse_m": 29.50923393390432,
+          "median_absolute_percent": 12.300169394267392
+        },
+        "far (>300 m)": {
+          "n": 0
+        }
+      }
+    },
+    "held_out_test": {
+      "n": 1053,
+      "r2": 0.4460767146611897,
+      "rmse_m": 17.880593911503144,
+      "median_absolute_percent": 24.013432994009026,
+      "range_bins": {
+        "near (<100 m)": {
+          "n": 1053,
+          "rmse_m": 17.880593911503144,
+          "median_absolute_percent": 24.013432994009026
+        },
+        "medium (100-300 m)": {
+          "n": 0
+        },
+        "far (>300 m)": {
+          "n": 0
+        }
+      }
+    }
+  },
+  "valid_range_interval": {
+    "min_m": 4.009,
+    "max_m": 275.477,
+    "median_m": 145.745,
+    "note": "Fit is only valid in this range; EXTRAPOLATION outside is unreliable."
+  },
+  "valid_size_interval": {
+    "sqrt_area_px_min": 5.92,
+    "sqrt_area_px_max": 412.89,
+    "bbox_h_min": 6.0,
+    "bbox_h_max": 241.0
+  },
+  "source_csv_files": [
+    {
+      "guidance_csv": "/home/tzi4/guidance/bumblebee/flight_logs/T5_ramp_descent.csv",
+      "ground_truth_csv": "/home/tzi4/guidance/bumblebee/flight_logs/gt_191749.csv",
+      "guidance_rows": 4320,
+      "valid_tracking_rows": 3511,
+      "ground_truth_rows": 2868,
+      "size_source": "sqrt_area_px",
+      "range_source": "range_m",
+      "guidance_time": [
+        1785341971.8844,
+        1785342130.179
+      ],
+      "ground_truth_time": [
+        1785341870.1716,
+        1785342158.4863
+      ],
+      "matched_samples": 3511,
+      "time_difference_rejections": 0,
+      "median_time_difference_s": 0.025299787521362305
+    },
+    {
+      "guidance_csv": "/home/tzi4/guidance/bumblebee/flight_logs/T2_recovery_from_above.csv",
+      "ground_truth_csv": "/home/tzi4/guidance/bumblebee/flight_logs/gt_191749.csv",
+      "guidance_rows": 3620,
+      "valid_tracking_rows": 3619,
+      "ground_truth_rows": 2868,
+      "size_source": "sqrt_area_px",
+      "range_source": "range_m",
+      "guidance_time": [
+        1785340649.6043,
+        1785340770.961
+      ],
+      "ground_truth_time": [
+        1785341870.1716,
+        1785342158.4863
+      ],
+      "matched_samples": 0,
+      "time_difference_rejections": 3619
+    }
+  ],
+  "all_models": [
+    {
+      "entry_name": "A",
+      "formula": "R = k / sqrt_area_px",
+      "input_column": "sqrt_area_px",
+      "all_data_parameters": {
+        "k": 2119.6749484349093
+      },
+      "training_parameters": {
+        "k": 2115.557665246598
+      },
+      "all_data": {
+        "n": 3511,
+        "r2": 0.8970906398218785,
+        "rmse_m": 26.073494837881604,
+        "median_absolute_percent": 16.15981155303779,
+        "range_bins": {
+          "near (<100 m)": {
+            "n": 1189,
+            "rmse_m": 17.504609314671384,
+            "median_absolute_percent": 23.667240504500157
+          },
+          "medium (100-300 m)": {
+            "n": 2322,
+            "rmse_m": 29.513350986089137,
+            "median_absolute_percent": 12.26105327358068
+          },
+          "far (>300 m)": {
+            "n": 0
+          }
+        }
+      },
+      "training_set": {
+        "n": 2458,
+        "r2": 0.7429373476438434,
+        "rmse_m": 28.883296390962517,
+        "median_absolute_percent": 12.34035759138845,
+        "range_bins": {
+          "near (<100 m)": {
+            "n": 136,
+            "rmse_m": 14.498482557447316,
+            "median_absolute_percent": 13.365283055528986
+          },
+          "medium (100-300 m)": {
+            "n": 2322,
+            "rmse_m": 29.50923393390432,
+            "median_absolute_percent": 12.300169394267392
+          },
+          "far (>300 m)": {
+            "n": 0
+          }
+        }
+      },
+      "held_out_test": {
+        "n": 1053,
+        "r2": 0.4460767146611897,
+        "rmse_m": 17.880593911503144,
+        "median_absolute_percent": 24.013432994009026,
+        "range_bins": {
+          "near (<100 m)": {
+            "n": 1053,
+            "rmse_m": 17.880593911503144,
+            "median_absolute_percent": 24.013432994009026
+          },
+          "medium (100-300 m)": {
+            "n": 0
+          },
+          "far (>300 m)": {
+            "n": 0
+          }
+        }
+      }
+    },
+    {
+      "entry_name": "B",
+      "formula": "R = k / bbox_h",
+      "input_column": "bbox_h",
+      "all_data_parameters": {
+        "k": 1702.4462220658245
+      },
+      "training_parameters": {
+        "k": 1723.7332861008254
+      },
+      "all_data": {
+        "n": 3511,
+        "r2": 0.90121184404716,
+        "rmse_m": 25.546078790865323,
+        "median_absolute_percent": 11.79820014419794,
+        "range_bins": {
+          "near (<100 m)": {
+            "n": 1189,
+            "rmse_m": 24.900012681963517,
+            "median_absolute_percent": 13.6127542647554
+          },
+          "medium (100-300 m)": {
+            "n": 2322,
+            "rmse_m": 25.870657193318483,
+            "median_absolute_percent": 10.688325771775531
+          },
+          "far (>300 m)": {
+            "n": 0
+          }
+        }
+      },
+      "training_set": {
+        "n": 2458,
+        "r2": 0.798457869304114,
+        "rmse_m": 25.574678773218235,
+        "median_absolute_percent": 11.076171324498105,
+        "range_bins": {
+          "near (<100 m)": {
+            "n": 136,
+            "rmse_m": 23.661008503908207,
+            "median_absolute_percent": 23.844581615058587
+          },
+          "medium (100-300 m)": {
+            "n": 2322,
+            "rmse_m": 25.68234275585812,
+            "median_absolute_percent": 10.557805928253657
+          },
+          "far (>300 m)": {
+            "n": 0
+          }
+        }
+      },
+      "held_out_test": {
+        "n": 1053,
+        "r2": -0.1494073769653801,
+        "rmse_m": 25.75693126625778,
+        "median_absolute_percent": 14.693658408919887,
+        "range_bins": {
+          "near (<100 m)": {
+            "n": 1053,
+            "rmse_m": 25.75693126625778,
+            "median_absolute_percent": 14.693658408919887
+          },
+          "medium (100-300 m)": {
+            "n": 0
+          },
+          "far (>300 m)": {
+            "n": 0
+          }
+        }
+      }
+    },
+    {
+      "entry_name": "C",
+      "formula": "R = a / sqrt_area_px + b",
+      "input_column": "sqrt_area_px",
+      "all_data_parameters": {
+        "a": 1898.3043965561383,
+        "b": 20.270727036318085
+      },
+      "training_parameters": {
+        "a": 1641.8472800238226,
+        "b": 46.366377181852876
+      },
+      "all_data": {
+        "n": 3511,
+        "r2": 0.9142668617387473,
+        "rmse_m": 23.7983128091958,
+        "median_absolute_percent": 11.12730218292476,
+        "range_bins": {
+          "near (<100 m)": {
+            "n": 1189,
+            "rmse_m": 17.836486277343027,
+            "median_absolute_percent": 13.435485074558562
+          },
+          "medium (100-300 m)": {
+            "n": 2322,
+            "rmse_m": 26.333677850730176,
+            "median_absolute_percent": 10.499515254206326
+          },
+          "far (>300 m)": {
+            "n": 0
+          }
+        }
+      },
+      "training_set": {
+        "n": 2458,
+        "r2": 0.8202388223569795,
+        "rmse_m": 24.15323000229714,
+        "median_absolute_percent": 9.323969622246375,
+        "range_bins": {
+          "near (<100 m)": {
+            "n": 136,
+            "rmse_m": 22.44633813517034,
+            "median_absolute_percent": 21.315923925877673
+          },
+          "medium (100-300 m)": {
+            "n": 2322,
+            "rmse_m": 24.249478714542075,
+            "median_absolute_percent": 8.823742515927766
+          },
+          "far (>300 m)": {
+            "n": 0
+          }
+        }
+      },
+      "held_out_test": {
+        "n": 1053,
+        "r2": -1.0272667075993667,
+        "rmse_m": 34.20680982201481,
+        "median_absolute_percent": 55.51615668325434,
+        "range_bins": {
+          "near (<100 m)": {
+            "n": 1053,
+            "rmse_m": 34.20680982201481,
+            "median_absolute_percent": 55.51615668325434
+          },
+          "medium (100-300 m)": {
+            "n": 0
+          },
+          "far (>300 m)": {
+            "n": 0
+          }
+        }
+      }
+    }
+  ]
+}

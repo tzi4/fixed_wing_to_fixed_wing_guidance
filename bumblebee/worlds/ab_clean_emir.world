@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<sdf version="1.6">
+  <world name="default">
+    <physics type="ode">
+      <ode>
+        <solver><type>quick</type><iters>100</iters><sor>1.0</sor></solver>
+        <constraints><cfm>0.0</cfm><erp>0.9</erp><contact_max_correcting_vel>100.0</contact_max_correcting_vel><contact_surface_layer>0.001</contact_surface_layer></constraints>
+      </ode>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <max_step_size>0.001</max_step_size>
+    </physics>
+    <scene>
+      <!-- Historical comparison world, retired from new measurements on 2026-07-28.
+The target now uses purple (models/purple_target, model://purple_target). Its HSV
+window H 140-160 does not overlap the sky or ground textures. A/B tests
+therefore use bumblebee_multi_uav.world and temp_multi_uav.world with the
+sky, runway, and grass intact. The simplified worlds remain available for
+reproducing historical red-target runs. The explanation below describes
+the rationale for those historical comparisons. -->
+      <!-- Historical A/B guidance test: the sky visual was removed.
+The Gazebo sky dome renders a pink/red horizon band at approximately
+BGR (127,127,255). During banked flight, the band fills the lower frame
+and enters the red HSV detection window as a false target about 1920 px
+wide and 150 px high. Guidance interprets it as a target 13 degrees below
+the horizon and saturates the altitude command at -25 m, causing a dive.
+Removing the sky leaves a flat gray background (0.25), with the target
+as the only red object. Physics, models, camera, parameters, and guidance
+code remain identical. Both comparison configurations, Bumblebee and Emir,
+use the same visual change. -->
+      <ambient>0.4 0.4 0.4 1</ambient>
+      <background>0.25 0.25 0.25 1</background>
+    </scene>
+    <model name="ground_plane">
+      <static>true</static>
+      <link name="link">
+        <collision name="collision">
+          <geometry><plane><normal>0 0 1</normal><size>5000 5000</size></plane></geometry>
+          <surface>
+            <contact><ode><max_vel>10.0</max_vel><min_depth>0.01</min_depth></ode></contact>
+            <friction><ode><mu>1.0</mu><mu2>1.0</mu2></ode></friction>
+          </surface>
+        </collision>
+        <!-- A/B GUIDANCE TEST: ground visuals were removed while retaining collision,
+takeoff and physical behavior. At grazing view angles, the ground texture
+produced red-tipped line artifacts about 13 degrees below the horizon. -->
+      </link>
+    </model>
+    <light name="sun" type="directional">
+      <cast_shadows>true</cast_shadows>
+      <pose>0 0 10 0 0 0</pose>
+      <diffuse>0.8 0.8 0.8 1</diffuse><specular>0.2 0.2 0.2 1</specular>
+      <attenuation><range>1000</range><constant>0.9</constant><linear>0.01</linear><quadratic>0.001</quadratic></attenuation>
+      <direction>-0.5 0.1 -0.9</direction>
+    </light>
+    <!-- A/B CONTROL WORLD: EXACTLY the same as bumblebee_multi_uav.world (physics, track, lighting, target, poses); The ONLY difference is the fighter model.          hunter = model://emir_aircraft_temp (commissioned aircraft known to be operational, but copy with camera converted to real spec). -->
+    <model name="hunter">
+      <include><uri>model://emir_aircraft_temp</uri></include>
+      <pose>0 0 0 0 0 0</pose>
+    </model>
+    <model name="target">
+      <include><uri>model://emir-gazebo-plane2</uri></include>
+      <pose>20 0 0 0 0 0</pose>
+    </model>
+  </world>
+</sdf>

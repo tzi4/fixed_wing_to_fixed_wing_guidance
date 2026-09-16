@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+tzi_emir_log_*.csv
+logs/
+reports/*
+!reports/range_calibration.json
+run/
+build/
+archive/
+
+# Flight/run data: fails on disk, won't get into git.
+flight_logs/
+flight_log_guided_*.csv
+altitude_difference_*.log
+27_july_logs/
+july_1_logs/
+new_verification_logs/
+videos/
+*.BIN
